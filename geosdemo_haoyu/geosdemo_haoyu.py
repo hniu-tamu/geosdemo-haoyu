@@ -7,12 +7,18 @@ import ipyleaflet
 class Map(ipyleaflet.Map):
 
     def __init__(self, center, zoom, **kwargs) -> None:
+        """Creates a Map instance."""
 
         if "scroll_wheel_zoom" not in kwargs:
             kwargs["scroll_wheel_zoom"] = True
         super().__init__(center=center, zoom=zoom, **kwargs)
 
     def add_search_control(self, position = "topleft", **kwargs):
+        """Adds a search control to the map.
+
+        Args:
+            kwargs: The keyword arguments of ipyleaflet.SearchControl.
+        """
 
         if "url" not in kwargs:
             kwargs["url"] = "https://nominatim.openstreetmap.org/search?format=json&q={s}"
@@ -22,6 +28,10 @@ class Map(ipyleaflet.Map):
         self.add_control(search_control)
 
     def add_draw_control(self, position = "topleft", **kwargs):
+        """Adds a draw control to the map.
+        
+        Args: Keyword arguments to pass to the draw control.
+        """
 
         if "edit" not in kwargs:
             kwargs["edit"] = True
