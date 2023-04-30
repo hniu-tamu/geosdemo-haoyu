@@ -81,6 +81,7 @@ nav:
     - Report Issues: https://github.com/hniu-tamu/geosdemo-haoyu/issues
     - Examples:
         - examples/intro.ipynb
+        - examples/folium.ipynb
     - API Reference:
           - geosdemo_haoyu module: geosdemo_haoyu.md
           - common module: common.md
