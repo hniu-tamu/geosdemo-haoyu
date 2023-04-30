@@ -2,6 +2,16 @@
 
 import string
 import random
+import ipyleaflet
+
+class Map(ipyleaflet.Map):
+
+    def __init__(self, center, zoom, **kwargs) -> None:
+
+        if "scroll_wheel_zoom" not in kwargs:
+            kwargs["scroll_wheel_zoom"] = True
+        super().__init__(center=center, zoom=zoom, **kwargs)
+
 
 def get_random_string(length=10, upper=False, digits=False):
     """Generate a random string of fixed length.
