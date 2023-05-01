@@ -85,6 +85,7 @@ nav:
         - examples/geosdemo.ipynb
         - examples/ipyleaflet.ipynb
         - examples/Working_with_CloudOptimizedGeoTIFF_simple.ipynb
+        - examples/raster.ipynb
     - API Reference:
           - geosdemo_haoyu module: geosdemo_haoyu.md
           - common module: common.md

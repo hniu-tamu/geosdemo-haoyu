@@ -175,6 +175,45 @@ class Map(ipyleaflet.Map):
         geojson = gdf.__geo_interface__
         self.add_geojson(geojson, name=name, **kwargs)
 
+    def add_raster(self, url, name='Raster', fit_bounds=True, **kwargs):
+        """Adds a raster layer to the map.
+        
+        Args:
+            url (str): The raster URL.
+            name (str, optional): The name of the raster layer. Defaults to 'Raster'.
+            fit_bounds (bool, optional): Whether to fit the map to the extent of the raster. Defaults to True.
+            kwargs: The keyword arguments of ipyleaflet.ImageOverlay.
+        """
+        import httpx
+
+        titiler_endpoint = "https://titiler.xyz"
+
+        r = httpx.get(
+            f"{titiler_endpoint}/cog/info",
+            params = {
+                "url": url,
+            }
+        ).json()
+
+        bounds = r["bounds"]
+        
+        r = httpx.get(
+            f"{titiler_endpoint}/cog/tilejson.json",
+            params = {
+                "url": url,
+            }
+        ).json()
+
+        tile = r["tiles"][0]
+
+        self.add_tile_layer(url=tile, name=name, **kwargs)
+
+        if fit_bounds:
+            bbox = [[bounds[1], bounds[0]], [bounds[3], bounds[2]]]
+            self.fit_bounds(bbox)
+
+
+
 
 def get_random_string(length=10, upper=False, digits=False):
     """Generate a random string of fixed length.
