@@ -87,4 +87,5 @@ nav:
         - examples/raster.ipynb
     - API Reference:
           - geosdemo_haoyu module: geosdemo_haoyu.md
+          - foliumap module: foliumap.md
           - common module: common.md
