@@ -1,7 +1,7 @@
 import folium
 
 class Map(folium.Map):
-    """Crate a folium map object.
+    """Create a folium map object.
 
     Args:
         folium (_type_): _description_
