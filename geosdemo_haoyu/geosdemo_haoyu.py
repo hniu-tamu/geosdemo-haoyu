@@ -140,7 +140,40 @@ class Map(ipyleaflet.Map):
                 self.add_tile_layer(url, name=basemap.name, attribution=attribution, **kwargs)
             except:
                 raise ValueError(f"Basemap '{basemap}' not found.")
+            
+    def add_geojson(self, data, name='GeoJSON', **kwargs):
+        """Adds a GeoJSON layer to the map.
+        
+        Args:
+            data (dict): The GeoJSON data.
+            style (dict, optional): The style of the GeoJSON features. Defaults to None.
+            hover_style (dict, optional): The hover style of the GeoJSON features. Defaults to None.
+            name (str, optional): The name of the GeoJSON layer. Defaults to None.
+            kwargs: The keyword arguments of ipyleaflet.GeoJSON.
+        """
 
+        if isinstance(data, str):
+            import json
+            with open(data, "r") as f:
+                data = json.load(f)
+
+        geo_json = ipyleaflet.GeoJSON(data=data, name=name, **kwargs)
+        self.add_layer(geo_json)
+
+    def add_shp(self, data, name='Shapefile', **kwargs):
+        """Adds a shapefile to the map.
+        
+        Args:
+            in_shp (str): The input shapefile.
+            name (str, optional): The name of the shapefile. Defaults to 'Shapefile'.
+            kwargs: The keyword arguments of ipyleaflet.GeoData.
+        """
+
+        import geopandas as gpd
+
+        gdf = gpd.read_file(data)
+        geojson = gdf.__geo_interface__
+        self.add_geojson(geojson, name=name, **kwargs)
 
 
 def get_random_string(length=10, upper=False, digits=False):
