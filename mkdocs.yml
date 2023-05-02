@@ -85,6 +85,8 @@ nav:
         - examples/geosdemo.ipynb
         - examples/ipyleaflet.ipynb
         - examples/raster.ipynb
+        - examples/ipywidgets.ipynb
+
     - API Reference:
           - geosdemo_haoyu module: geosdemo_haoyu.md
           - foliumap module: foliumap.md
